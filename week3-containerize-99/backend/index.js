@@ -81,7 +81,7 @@ app.delete('/api/products/:id', async (req, res) => {
       'DELETE FROM products WHERE id=$1 RETURNING *', [req.params.id]
     );
     if (!rows[0]) return res.status(404).json({ error: 'ไม่พบสินค้า' });
-    res.json({ message: 'ลบสินค้าสำเร็จ', deleted: rows[0] });
+    res.json({ message: 'ลบสินค้า', deleted: rows[0] });
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
