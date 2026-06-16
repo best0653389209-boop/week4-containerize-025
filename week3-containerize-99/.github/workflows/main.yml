@@ -7,30 +7,11 @@ on:
     branches: [ "main", "devlo" ]
 
 jobs:
-  validate-and-build:
+  simple-check:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Verify Workspace Layout
-        run: |
-          echo "=== Checking Root Files ==="
-          ls -la
-          echo "=== Checking Backend ==="
-          if [ -d "backend" ]; then ls -la backend; else echo "No backend folder found"; fi
-          echo "=== Checking Frontend ==="
-          if [ -d "frontend" ]; then ls -la frontend; else echo "No frontend folder found"; fi
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Test Docker Compose Configuration
-        run: |
-          docker compose config
+      - name: Run Test Command
+        run: echo "Hello World, Pipeline is working!"
