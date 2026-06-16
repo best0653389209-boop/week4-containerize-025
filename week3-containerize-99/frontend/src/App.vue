@@ -145,7 +145,7 @@ onMounted(fetchProducts)
           <div class="logo-sub">ระบบจัดการสินค้าคงคลัง</div>
         </div>
       </div>
-      <button class="btn-add" @click="openAdd">+ เพิ่มสินค้า</button>
+      <button class="btn-add" @click="openAdd">นำสินค้าเข้าร้าน</button>
     </header>
 
     <main class="main">
@@ -315,7 +315,7 @@ onMounted(fetchProducts)
         </div>
         <div class="confirm-actions">
           <button class="btn-cancel" @click="confirmDelete = null">ยกเลิก</button>
-          <button class="btn-danger-confirm" @click="deleteProduct(confirmDelete.id)">ลบเลย</button>
+          <button class="btn-danger-confirm" @click="deleteProduct(confirmDelete.id)">ลบ</button>
         </div>
       </div>
     </div>
