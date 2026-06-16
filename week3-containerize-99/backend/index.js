@@ -59,6 +59,22 @@ app.post('/api/products', async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
+// POST /api/products — เพิ่มสินค้าใหม่
+app.post('/api/products', async (req, res) => {
+  try {
+    const { name, category, price, stock, description = '' } = req.body;
+    if (!name || !category || price == null || stock == null) {
+      return res.status(400).json({ error: 'กรุณาระบุ name, category, price, stock' });
+    }
+    const { rows } = await pool.query(
+      `INSERT INTO products (name, category, price, stock, description)
+       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      [name.trim(), category.trim(), parseFloat(price), parseInt(stock), description.trim()]
+    );
+    res.status(201).json(rows[0]);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
 // PUT /api/products/:id — แก้ไขสินค้า
 app.put('/api/products/:id', async (req, res) => {
   try {
