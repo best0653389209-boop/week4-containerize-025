@@ -2,9 +2,24 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "devlo" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "devlo" ]
 
 jobs:
-  # ... ขั้นตอนการสั่งรันด้านล่าง เช่น build docker ...
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-size: 20
+
+      - name: Check Files
+        run: |
+          echo "Checking directory structure..."
+          ls -la
