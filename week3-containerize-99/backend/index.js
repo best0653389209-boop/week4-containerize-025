@@ -120,7 +120,6 @@ async function initDb() {
     console.log('🌱 Seed data inserted (10 products)');
   }
 }
-<h1>BEST</h1>
 
 // รัน initDb ก่อน start server
 initDb()
