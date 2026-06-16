@@ -7,7 +7,7 @@ on:
     branches: [ "main", "devlo" ]
 
 jobs:
-  build-and-test:
+  validate-and-build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,18 @@ jobs:
         with:
           node-version: 20
 
-      - name: Check Files
+      - name: Verify Workspace Layout
         run: |
-          echo "Checking directory structure..."
+          echo "=== Checking Root Files ==="
           ls -la
+          echo "=== Checking Backend ==="
+          if [ -d "backend" ]; then ls -la backend; else echo "No backend folder found"; fi
+          echo "=== Checking Frontend ==="
+          if [ -d "frontend" ]; then ls -la frontend; else echo "No frontend folder found"; fi
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Test Docker Compose Configuration
+        run: |
+          docker compose config
